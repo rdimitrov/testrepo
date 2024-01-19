@@ -1,4 +1,4 @@
-name: build-binary
+name: gh-at-binary
 
 on:
   workflow_dispatch:
