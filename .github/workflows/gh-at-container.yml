@@ -74,7 +74,7 @@ jobs:
         with:
           subject-name: ${{ steps.meta.outputs.tags }}
           subject-digest: ${{ steps.build-and-push.outputs.digest }}
-          push-to-registry: false
+          push-to-registry: true
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
       # repository is public to avoid leaking data.  If you would like to publish
