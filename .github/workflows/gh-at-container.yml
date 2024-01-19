@@ -1,4 +1,4 @@
-name: gh-at-container
+name: GHAT - Signed - Container
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -20,10 +20,11 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: testrepo-gh-at
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -65,8 +66,8 @@ jobs:
         uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         with:
           context: .
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ghatsigned
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ghcr.io/rdimitrov/a-testrepo:ghatsigned
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -74,6 +75,6 @@ jobs:
       - name: generate build provenance
         uses: github-early-access/generate-build-provenance@main
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ghatsigned
+          subject-name: ghcr.io/rdimitrov/a-testrepo:ghatsigned
           subject-digest: ${{ steps.build-and-push.outputs.digest }}
           push-to-registry: true
