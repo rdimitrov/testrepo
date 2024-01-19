@@ -77,4 +77,4 @@ jobs:
         with:
           subject-name: ghcr.io/rdimitrov/a-testrepo:ghatsigned
           subject-digest: ${{ steps.build-and-push.outputs.digest }}
-          push-to-registry: true
+          push-to-registry: false
