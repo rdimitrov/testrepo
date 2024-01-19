@@ -71,7 +71,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64,linux/arm64
-    - name: generate build provenance
+      - name: generate build provenance
         uses: github-early-access/generate-build-provenance@main
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ghatsigned
